@@ -2,9 +2,9 @@
     <div >
         <h1>Your Search here : </h1>
             <input class="hi" v-model="message" placeholder="Search here"/>
-    <br/> 
+             <br/> 
             <div>
-                <button>Search here</button>
+                <button @click="handleClick">Search here</button>
             </div>
             <p class="ho">{{message}}</p>
         </div>
@@ -16,6 +16,23 @@ export default {
     data(){
         return{
             message:''
+        }
+    },
+    methods:{
+        handleClick(){
+            console.log(this.message)
+            this.handleGit()
+        },
+        handleGit(){
+            fetch(`https://api.github.com/users/${this.message}`, { 
+                 headers: {
+                      'Accept' : 'application/vnd.github.v3+json'
+                  }})
+		// .then(response => response.json()) //Converting the response to a JSON object
+		.then( res => {
+            res.json()
+                })
+		.catch( error => console.error(error));
         }
     }
 }
