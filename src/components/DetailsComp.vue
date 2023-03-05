@@ -64,14 +64,22 @@ create(){
   }
 
   h1 {
-    font-size: 3rem;
-    color: #333;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    margin: 2rem 0;
-    text-shadow: 1px 1px 2px #888;
+  font-size: 2rem;
+  color: #333;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 1rem 0;
+  text-shadow: 1px 1px 2px #888;
+}
+
+/* Media queries for mobile devices */
+@media only screen and (max-width: 600px) {
+  h1 {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
   }
+}
 </style>
 
 

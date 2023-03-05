@@ -1,8 +1,17 @@
 body {
-    background-image: linear-gradient(to bottom right, #ffecd2, #fcb69f);
-    border-color: transparent;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    /* Add any other background styles here */
+  background: linear-gradient(to bottom, #78ffd6, #a8ff78);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
   }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

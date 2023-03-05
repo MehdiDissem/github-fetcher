@@ -1,7 +1,7 @@
 /* eslint-disable */
 <template>
     <div >
-        <h1 class="title">Your Search here : </h1>
+        <h1 class="title">Find on Github: </h1>
             <input class="hi" v-model="message" placeholder="Search here"/>
             <br/> 
             <div>
@@ -87,34 +87,138 @@ export default {
 <style >
 
 .hi {
-    padding: 0.8rem 1.2rem;
-    border-radius: 5rem;
-    border: none;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
-    font-size: 1.2rem;
-    color: #333;
-    background-color: #fff;
-    transition: all 0.3s ease-in-out;
-    outline: none;
-    margin: 1rem 0;
+  position: relative;
+  padding: 0.8rem 1.2rem;
+  border-radius: 5rem;
+  border: none;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  font-size: 1.2rem;
+  color: #333;
+  background-color: #fff;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  margin: 1rem 0;
+}
+
+.hi:hover {
+  background-color: #333;
+  color: #fff;
+}
+
+.hi::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: #333;
+  transform: skew(-20deg);
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+}
+
+.hi:hover::before {
+  left: 0;
+  transform: skew(-20deg) translateX(100%);
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
   }
-  .hi:focus {
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3);
-    transform: scale(1.02);
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
   }
+}
+
+.hi::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid #333;
+  animation: pulse 1s infinite;
+  animation-direction: alternate;
+  animation-timing-function: ease-in-out;
+  opacity: 0;
+}
+
+.hi:hover::after {
+  width: 4rem;
+  height: 4rem;
+  opacity: 1;
+}
 .ho{
     color:black
 }
 #img {
   border-radius: 50%;
-  max-width: 10%;
+  max-width: 50%;
   margin-top: 30px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  filter: grayscale(100%);
+}
+
+/* Media query for mobile devices */
+@media only screen and (max-width: 600px) {
+  #img {
+    max-width: 100%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  }
 }
 
 #img:hover {
-  transform: scale(1.2);
+  transform: scale(1.2) rotate(10deg);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  filter: grayscale(0%);
+}
+
+#img::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  background-image: radial-gradient(ellipse at center, #fff 0%, #fff 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#img:hover::before {
+  opacity: 1;
+}
+
+#img::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.3);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+#img:hover::after {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
 }
 #btn {
   background-color: #4CAF50;
@@ -157,17 +261,16 @@ export default {
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 100%;
+  width: 0%;
   height: 3px;
   background-color: #666;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s ease-out;
+  transform-origin: left;
+  transition: width 0.3s ease-out;
 }
 
 .title:hover::before {
-  transform: scaleX(1);
-  transform-origin: left;
+  width: 100%;
+  transform-origin: right;
 }
 
 @media (max-width: 767px) {
