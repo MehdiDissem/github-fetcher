@@ -7,30 +7,41 @@
                 <button @click="handleClick">Search here</button>
             </div>
             <p class="ho">{{message}}</p>
+            <div>
+                <img :src="avatar"/>
+                <p>{{ dat }}</p>
+
+            </div>
         </div>
 
 </template>
 <script>
+import axios from "axios"
 export default {
     name:'SearchComp',
     data(){
         return{
-            message:''
+            message:'',
+            dat:'',
+            avatar:"https://avatars.githubusercontent.com/u/55929607?v=4"
         }
     },
-    methods:{
-        handleClick(){
-            console.log(this.message)
+    // mounted(){
+        //     this.handleGit()
+        // },
+        methods:{
+            handleClick(){
             this.handleGit()
         },
         handleGit(){
-            fetch(`https://api.github.com/users/${this.message}`, { 
-                 headers: {
-                      'Accept' : 'application/vnd.github.v3+json'
-                  }})
-		// .then(response => response.json()) //Converting the response to a JSON object
-		.then( res => {
-            res.json()
+            axios.get(`https://api.github.com/users/${this.message}`, { 
+                headers: {
+                    'Accept' : 'application/vnd.github.v3+json'
+                }})
+                // .then(response => response.json()) //Converting the response to a JSON object
+                .then( res => {console.log(this.dat)
+                    this.dat=res.data
+                    this.avatar = res.data.avatar_url
                 })
 		.catch( error => console.error(error));
         }
