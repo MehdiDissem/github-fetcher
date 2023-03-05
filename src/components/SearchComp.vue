@@ -1,14 +1,16 @@
+/* eslint-disable */
 <template>
     <div >
         <h1>Your Search here : </h1>
             <input class="hi" v-model="message" placeholder="Search here"/>
-             <br/> 
+            <br/> 
             <div>
-                <button @click="handleClick">Search here</button>
+                <button id="btn" @click="handleClick">Search here</button>
             </div>
             <p class="ho">{{message}}</p>
             <div>
-                <img :src="avatar"/>
+                <img :src="avatar" id="img"/>
+                <p>Following : {{ dat.following }}</p>
                 <p>{{ dat }}</p>
 
             </div>
@@ -17,6 +19,8 @@
 </template>
 <script>
 import axios from "axios"
+// Optionally import default styling
+
 export default {
     name:'SearchComp',
     data(){
@@ -48,7 +52,8 @@ export default {
     }
 }
 </script>
-<style scoped>
+<style >
+
 .hi{
     width: 250px;
     height:40px;
@@ -57,5 +62,29 @@ export default {
 }
 .ho{
     color:black
+}
+#img{
+    border-radius: 50%;
+    max-width: 10%;
+    margin-top: 30px;
+    
+}
+#btn{
+    margin-top: 30px;
+background-color: black; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+#btn:hover{
+    color:black;
+    background-color: grey;
+    border-radius: 20;
+    font-weight: bold;
 }
 </style>

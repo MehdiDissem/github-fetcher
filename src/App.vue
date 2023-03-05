@@ -1,15 +1,15 @@
 <template>
-  <SearchComp/>
+   <router-view />
 </template>
 
 <script>
-import SearchComp from './components/SearchComp.vue';
+// import SearchComp from './components/SearchComp.vue';
 
 export default {
   name: 'App',
-  components: {
-    SearchComp
-}
+//   components: {
+//     SearchComp
+// }
 }
 </script>
 
