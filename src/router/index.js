@@ -2,6 +2,7 @@ import { createWebHistory, createRouter } from "vue-router"
 import SearchComp from "@/components/SearchComp.vue"
 import NotFound from "@/components/NotFound.vue"
 import DetailsComp from "@/components/DetailsComp.vue"
+import ReposComp from "@/components/ReposComp.vue"
 
 const routes = [
     {
@@ -18,6 +19,11 @@ const routes = [
       path:"/details",
       name:"DetailsComp",
       component:DetailsComp
+    },
+    {
+      path:"/ReposComp",
+      name:"ReposComp",
+      component:ReposComp
     }
   ]
 

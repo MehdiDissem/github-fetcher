@@ -18,9 +18,17 @@
                 </transition>
             </div>
             <div>
-                <button id="btn" @click="modal = !modal">Show details</button>
+                <transition name="fade" v-if=" show===true">
+                    <button id="btn" @click="modal = !modal, repos = repos">Show details</button>
+                </transition>
+                <transition name="fade" v-if=" show===true">
+                    <button id="btn" @click="repos = !repos, modal= !modal">Show Repos</button>
+                </transition>
                 <div v-show="modal"  >
                     <DetailsComp :dat="dat"/>
+                </div>
+                <div v-show="repos"  >
+                    <ReposComp :repositories="repositories"/>
                 </div>
             </div>
         </div>
@@ -29,17 +37,21 @@
 import axios from "axios"
 import router from '@/router'
 import DetailsComp from './DetailsComp.vue'
+import ReposComp from "./ReposComp.vue"
 // Optionally import default styling
 
 export default {
     name:'SearchComp',
-    components:{DetailsComp},
+    components:{DetailsComp,ReposComp},
     data(){
         return{
             modal:false,
             message:'',
             dat:'',
-            avatar:"https://avatars.githubusercontent.com/u/55929607?v=4"
+            avatar:"https://avatars.githubusercontent.com/u/55929607?v=4",
+            show:false,
+            repos:false,
+            repositories:''
         }
     },
     // mounted(){
@@ -59,6 +71,11 @@ export default {
                     console.log(this.dat)
                     this.dat=res.data
                     this.avatar = res.data.avatar_url
+                    this.show= true
+                    axios.get(`https://api.github.com/users/${this.message}/repos`, { 
+                headers: {
+                    'Accept' : 'application/vnd.github.v3+json'
+                }}).then(res => {this.repositories=res.data, console.log(this.repositories)}).catch(err => console.log(err))
                 })
 		.catch( error => {console.error(error)
         router.push({name:'NotFound'})
