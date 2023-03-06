@@ -19,10 +19,10 @@
             </div>
             <div>
                 <transition name="fade" v-if=" show===true">
-                    <button id="btn" @click="modal = !modal, repos = repos">Show details</button>
+                    <button id="btn" @click="modal = true, repos = false">Show details</button>
                 </transition>
                 <transition name="fade" v-if=" show===true">
-                    <button id="btn" @click="repos = !repos, modal= !modal">Show Repos</button>
+                    <button id="btn" @click="repos = true, modal= false">Show Repos</button>
                 </transition>
                 <div v-show="modal"  >
                     <DetailsComp :dat="dat"/>
